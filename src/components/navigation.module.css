@@ -1,45 +1,99 @@
 .navigation {
     display: flex;
     flex-direction: column;
-    gap: var(--padding);
+    gap: var(--spacing);
 
+    max-width: 250px;
     min-height: 100vh;
     min-width: 250px;
-    padding-left: var(--padding);
-    padding-top: var(--padding);
-    padding-bottom: var(--padding);
+    padding-top: var(--spacing);
+    padding-bottom: var(--spacing);
+    padding-left: var(--spacing);
 }
 
-.list {
+.navigate {
     display: flex;
     flex-direction: column;
-    gap: var(--padding);
-    list-style-type: none;
+    gap: var(--spacing);
 
     height: 100%;
-    padding: var(--padding);
+    padding: var(--spacing);
 
-    background-color: #F8F5F1;
+    background-color: var(--primary-color);
     border-radius: var(--border-radius);
     font-size: 12px;
+}
+
+.tab_list {
+    list-style-type: none;
+}
+
+.tab {
+    border-radius: var(--border-radius);
+    padding: var(--spacing);
+}
+
+.tab_active {
+    background-color: var(--secondary-color-2);
 }
 
 .title {
     font-weight: 700;
 }
 
-.tab {
-    border-radius: var(--border-radius);
-    padding: var(--padding);
-}
-
-.tab-active {
-    background-color: #E9E6E3;
-}
-
 .music {
-    height: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 
-    background-color: #F8F5F1;
+    height: auto;
+    padding: var(--spacing);
+
+    background-color: var(--primary-color);
     border-radius: var(--border-radius);
+}
+
+.image {
+    height: 226px;
+    width: 100%;
+}
+
+.marquee {
+    --marquee-gap: 20px;
+    display: flex;
+    gap: var(--marquee-gap);
+
+    position: relative;
+    max-width: fit-content;
+    overflow: hidden;
+
+    font-size: 20px;
+    font-weight: 600;
+    list-style-type: none;
+    user-select: none;
+}
+
+.marquee_content {
+    display: flex;
+    flex-shrink: 0;
+    justify-content: space-around;
+    gap: var(--marquee-gap);
+    
+    min-width: 100%;
+
+    animation: scroll 15s linear infinite;
+    list-style-type: none;
+}
+
+@keyframes scroll {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(calc(-100% - var(--marquee-gap)));
+    }
+}
+
+.composer {
+    font-size: 12px;
 }
