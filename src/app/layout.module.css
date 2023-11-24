@@ -1,0 +1,7 @@
+.components {
+    display: flex;
+    gap: var(--spacing);
+
+    height: 100%;
+    width: 100%;
+}
