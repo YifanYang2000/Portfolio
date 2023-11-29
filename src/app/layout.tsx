@@ -1,7 +1,6 @@
-import Navigation from '@/components/navigation'
+import AppWrapper from '@/components/app_wrapper'
 import type { Metadata } from 'next'
 import { Poppins } from 'next/font/google'
-import styles from './layout.module.css'
 import './globals.css'
 
 const poppins = Poppins({
@@ -23,10 +22,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={poppins.className}>
-        <div className={styles.components}>
-          <Navigation/>
+        <AppWrapper>
           {children}
-        </div>
+        </AppWrapper>
       </body>
     </html>
   )

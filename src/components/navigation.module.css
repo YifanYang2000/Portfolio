@@ -40,7 +40,7 @@
     background-color: var(--secondary-color-2);
 }
 
-.tab:hover {
+:not(.tab_active).tab:hover {
     background-color: rgba(233, 230, 227, 0.6)
 }
 
@@ -51,7 +51,7 @@
 .music {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: var(--spacing);
 
     height: auto;
     padding: var(--spacing);

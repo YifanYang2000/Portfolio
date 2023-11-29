@@ -1,13 +1,22 @@
 "use client"
 
-import Link from 'next/link';
 import Image from 'next/image'
+import { Dispatch, SetStateAction, useEffect, useRef } from 'react';
 import signature from '@/resources/Signature.png'
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import styles from './navigation.module.css'
 
-export default function Navigation() {
+interface Props {
+    loading: boolean,
+    navigate: boolean,
+    setNavigate: Dispatch<SetStateAction<boolean>>
+}
+
+export default function Navigation(props: Props) {
     const pathname = usePathname();
+    const savedpathname = useRef(pathname);
+    const nextpathname = useRef(pathname);
+    const router = useRouter();
     const tabs = [
         {
             'title' : 'HOME',
@@ -31,20 +40,47 @@ export default function Navigation() {
         }
     ];
 
+    // When loading screen is in-screen, perform page change
+    useEffect(() => {
+        if (props.loading && nextpathname.current != pathname) {
+            router.push(nextpathname.current);
+        }
+    }, [props.loading])
+
+    // When new page is fully loaded, allow for next navigation action
+    useEffect(() => {
+        if (savedpathname.current != pathname) {
+            props.setNavigate(false);
+            savedpathname.current = pathname;
+        }
+    }, [pathname])
+
+    // Before attempting navigating to new page, 
+    function onTabClick(path: string) {
+        // Prevent navigation while another navigation is in course
+        if (props.navigate || path == nextpathname.current) {
+            return;
+        }
+        props.setNavigate(true);
+        nextpathname.current = path;
+    }
+
     function getTabs() {
         return (
             <ul className={styles.tab_list}>
                 {tabs.map((tab, index) => (
                     <li
-                        className={
-                            styles['tab'] + " " +
-                            `${pathname == tab.path ? styles['tab_active'] : styles['tab_inactive']}`}
+                        className={styles['tab'] + " " +
+                            `${nextpathname.current == tab.path
+                                ? styles['tab_active']
+                                : styles['tab_inactive']}`}
+                        onClick={() => {onTabClick(tab.path)}}
                         key={index}
                     >
-                        <Link href={tab.path}>
+                        <a href="#">
                             <div className={styles.title}>{tab.title}</div>
                             <div>{tab.desc}</div>
-                        </Link>
+                        </a>
                     </li>
                 ))}
             </ul>
@@ -54,14 +90,14 @@ export default function Navigation() {
     return (
         <div className={styles.navigation}>
             <div className={styles.navigate}>
-                <Link href={'/'}>
+                <a href="#" onClick={() => {onTabClick('/')}}>
                     <Image
                         src={signature}
                         alt='signature logo'
                         height={75}
                         width={75}
                     />
-                </Link>
+                </a>
                 {getTabs()}
             </div>
 
@@ -71,10 +107,10 @@ export default function Navigation() {
                     src="https://open.spotify.com/embed/track/1CHswVnHopmeIly3bTSnmF?utm_source=generator&theme=0"
                     width="100%"
                     height="352"
-                    frameBorder="0"
-                    allow="clipboard-write; encrypted-media;
-                           fullscreen; picture-in-picture"
+                    allow="clipboard-write; encrypted-media; fullscreen;
+                           picture-in-picture"
                     loading="lazy"
+                    style={{"border":"0"}}
                 >
                 </iframe>
             </div>
