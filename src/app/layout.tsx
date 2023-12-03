@@ -1,4 +1,4 @@
-import AppWrapper from '@/components/app_wrapper'
+import AppWrapper from '../components/app_wrapper'
 import type { Metadata } from 'next'
 import { Poppins } from 'next/font/google'
 import './globals.css'

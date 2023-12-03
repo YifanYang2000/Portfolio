@@ -2,34 +2,26 @@
   height: 100%;
   width: 100%;
   overflow-y: auto;
-  /* scrollbar-width: none;
-  -ms-overflow-style: none; */
 
   background-color: var(--primary-color);
   border-radius: var(--border-radius);
 }
 
-/* .main::-webkit-scrollbar {
-    width: 0;
-    height: 0;
-} */
-
 .content {
   display: flex;
   flex-direction: column;
   
-  height: 100%;
+  height: 1500px;
   width: 100%;
-}
-
-/* Enable hover only on non-touch devices */
-@media (hover: hover) and (pointer: fine) {
+  padding: var(--spacing);
 }
 
 /* Mobile */
-@media (max-width: 700px) {
-}
+@media (max-width: 810px) {
+  .main {
+    height: fit-content;
+    overflow-y: visible;
 
-/* Tablet and Smaller Desktop */
-@media (min-width: 701px) and (max-width: 1120px) {
+    border-radius: 0px;
+  }
 }

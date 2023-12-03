@@ -4,8 +4,9 @@
     gap: var(--spacing);
 
     height: 100%;
-    max-width: 300px;
+    width: 300px;
     min-width: 300px;
+    max-width: 300px;
 
     font-size: 12px;
 }
@@ -22,10 +23,28 @@
     border-radius: var(--border-radius);
 }
 
+.header {
+    display: flex;
+}
+
+.logo {
+    position: relative;
+    height: var(--logo-size-large);
+    width: var(--logo-size-large);
+    margin-right: auto;
+    
+    cursor: pointer;
+}
+
+.close_mobile_nav {
+    display: none;
+}
+
 .tab_list {
     display: flex;
     flex-direction: column;
     gap: var(--spacing);
+
     list-style-type: none;
 }
 
@@ -33,15 +52,12 @@
     padding: var(--spacing);
 
     border-radius: var(--border-radius);
+    cursor: pointer;
     transition-duration: 500ms;
 }
 
 .tab_active {
     background-color: var(--secondary-color-2);
-}
-
-:not(.tab_active).tab:hover {
-    background-color: rgba(233, 230, 227, 0.6)
 }
 
 .title {
@@ -58,4 +74,58 @@
 
     background-color: var(--primary-color);
     border-radius: var(--border-radius);
+}
+
+/* Enable hover only on non-touch devices */
+@media (hover: hover) and (pointer: fine) {
+    :not(.tab_active).tab:hover {
+        background-color: rgba(233, 230, 227, 0.6)
+    }
+}
+
+/* Mobile */
+@media (max-width: 810px) {
+    .navigation_wrapper {
+        position: absolute;
+        z-index: 3;
+
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+    
+        border-radius: var(--border-radius);
+        transition-duration: var(--slide-animation-duration);
+    }
+
+    .show_mobile_nav {
+        height: 100%;
+    }
+
+    .hide_mobile_nav {
+        height: 0%;
+    }
+
+    .navigation {
+        gap: 0px;
+    
+        height: 100vh;
+        width: 100%;
+        min-width: 100%;
+        max-width: 100%;
+    
+        background-color: var(--primary-color);
+        border-radius: var(--border-radius);
+    }
+
+    .logo {
+        height: var(--logo-size-small);;
+        width: var(--logo-size-small);;
+    }
+
+    .close_mobile_nav {
+        display: inherit;
+
+        font-size: 16px;
+        cursor: pointer;
+    }
 }

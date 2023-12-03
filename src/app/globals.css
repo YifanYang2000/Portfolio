@@ -1,7 +1,11 @@
 :root {
-  --max-width: 1500;
+  --max-width: 1500px;
   --border-radius: 5px;
   --spacing: 7px;
+
+  --logo-size-large: 75px;
+  --logo-size-small: 50px;
+  --slide-animation-duration: 500ms;  /* Change the constant var too */
 
   --primary-color: #F8F5F1;
   --secondary-color-1: #FFFDF9;
@@ -34,4 +38,11 @@ body {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+/* Mobile */
+@media (max-width: 810px) {
+  body {
+    padding: 0px;
+  }
 }

@@ -1,0 +1,36 @@
+.header {
+    display: none;
+    align-items: start;
+    
+    position: sticky;
+    top: 0;
+    z-index: 2;
+
+    height: auto;
+    width: 100%;
+    padding: var(--spacing);
+
+    background-color: var(--primary-color);
+}
+
+.logo {
+    position: relative;
+}
+
+@media (max-width: 810px) {
+    .header {
+        display: flex;
+    }
+    
+    .logo {
+        height: var(--logo-size-small);
+        width: var(--logo-size-small);;
+        margin-right: auto;
+
+        cursor: pointer;
+    }
+    
+    .hamburger {
+        cursor: pointer;
+    }
+}
