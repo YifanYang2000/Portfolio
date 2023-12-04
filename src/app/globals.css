@@ -2,9 +2,11 @@
   --max-width: 1500px;
   --border-radius: 5px;
   --spacing: 7px;
+  --double-spacing: 14px;
 
   --logo-size-large: 75px;
   --logo-size-small: 50px;
+  --nav-icon-size: 35px;
   --slide-animation-duration: 500ms;  /* Change the constant var too */
 
   --primary-color: #F8F5F1;

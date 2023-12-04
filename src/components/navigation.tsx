@@ -8,6 +8,8 @@ import {
     tabs,
 } from '../constants';
 import { Dispatch, SetStateAction } from 'react';
+import { IconContext } from 'react-icons';
+import { FiX } from "react-icons/fi";
 import styles from './navigation.module.css'
 
 interface Props {
@@ -64,7 +66,11 @@ export default function Navigation(props: Props) {
                             className={styles.close_mobile_nav}
                             onClick={() => {props.setIsMobileNavOpen(false)}}
                         >
-                            CLOSE
+                            <IconContext.Provider
+                                value={{className: styles.close_mobile_nav}}
+                            >
+                                <FiX/>
+                            </IconContext.Provider>
                         </div>
                     </div>
                     {getTabs()}

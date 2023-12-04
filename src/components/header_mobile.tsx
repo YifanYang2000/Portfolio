@@ -2,6 +2,8 @@ import Image from 'next/image'
 import signature from '../resources/Signature.png'
 import { logoSizeSmall, mobileSize } from '../constants';
 import { Dispatch, SetStateAction } from 'react';
+import { IconContext } from 'react-icons';
+import { FiMenu } from "react-icons/fi";
 import styles from './header_mobile.module.css'
 
 interface Props {
@@ -23,11 +25,12 @@ export default function HeaderMobile(props: Props) {
                     fill={true}
                 />
             </div>
-            <div
-                className={styles.hamburger}
-                onClick={() => {props.setIsMobileNavOpen(true)}}
-            >
-                MENU
+            <div onClick={() => {props.setIsMobileNavOpen(true)}}>
+                <IconContext.Provider
+                    value={{className: styles.open_mobile_nav}}
+                >
+                    <FiMenu/>
+                </IconContext.Provider>
             </div>
         </div>
     )

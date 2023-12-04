@@ -14,7 +14,7 @@
 .navigate {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing);
+    gap: var(--double-spacing);
 
     height: 100%;
     padding: var(--spacing);
@@ -96,13 +96,17 @@
         border-radius: var(--border-radius);
         transition-duration: var(--slide-animation-duration);
     }
-
+    
     .show_mobile_nav {
         height: 100%;
     }
-
+    
     .hide_mobile_nav {
         height: 0%;
+    }
+
+    .navigate {
+        padding: var(--double-spacing);
     }
 
     .navigation {
@@ -125,7 +129,15 @@
     .close_mobile_nav {
         display: inherit;
 
-        font-size: 16px;
+        height: var(--nav-icon-size);
+        width: var(--nav-icon-size);
+
+        color: var(--secondary-color-3);
         cursor: pointer;
+        stroke-width: 1px;
+    }
+
+    .music {
+        padding: var(--double-spacing);
     }
 }

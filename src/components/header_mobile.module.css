@@ -1,14 +1,12 @@
 .header {
     display: none;
-    align-items: start;
     
     position: sticky;
     top: 0;
     z-index: 2;
 
-    height: auto;
     width: 100%;
-    padding: var(--spacing);
+    padding: var(--double-spacing);
 
     background-color: var(--primary-color);
 }
@@ -30,7 +28,12 @@
         cursor: pointer;
     }
     
-    .hamburger {
+    .open_mobile_nav {
+        height: var(--nav-icon-size);
+        width: var(--nav-icon-size);
+        
+        color: var(--secondary-color-3);
         cursor: pointer;
+        stroke-width: 1px;
     }
 }
