@@ -49,7 +49,11 @@
 }
 
 .tab {
-    padding: var(--spacing);
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    padding: var(--double-spacing);
 
     border-radius: var(--border-radius);
     cursor: pointer;

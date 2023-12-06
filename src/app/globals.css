@@ -1,6 +1,6 @@
 :root {
-  --max-width: 1500px;
   --border-radius: 5px;
+  --max-width: 1500px;
   --spacing: 7px;
   --double-spacing: 14px;
 
@@ -29,8 +29,10 @@ body {
   width: 100%;
   overflow-x: hidden;
   
-  color: var(--secondary-color-3);
   background-color: var(--secondary-color-1);
+  color: var(--secondary-color-3);
+  letter-spacing: -0.5px;
+  line-height: 1;
 }
 
 body {

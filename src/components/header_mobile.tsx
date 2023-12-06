@@ -4,6 +4,7 @@ import { logoSizeSmall, mobileSize } from '../constants';
 import { Dispatch, SetStateAction } from 'react';
 import { IconContext } from 'react-icons';
 import { FiMenu } from "react-icons/fi";
+import { usePathname } from 'next/navigation';
 import styles from './header_mobile.module.css'
 
 interface Props {
@@ -12,8 +13,15 @@ interface Props {
 }
 
 export default function HeaderMobile(props: Props) {
+    const pathname = usePathname();
+
     return (
-        <div className={styles.header}>
+        <div
+            className={styles['header'] + ' ' +
+                `${pathname == '/'
+                ? styles['transparent']
+                : styles['visible']}`}
+        >
             <div
                 className={styles.logo}
                 onClick={() => {props.onNavClick('/')}}
