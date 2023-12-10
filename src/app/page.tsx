@@ -3,30 +3,43 @@
 import David from './../resources/David.png'
 import Image from 'next/image'
 import {
-  davidMovTime,
+  davidMoveTime,
   davidSmallSize,
   davidSize,
-  mobileSize
+  davidRotationTime,
+  mobileSize,
+  pageHeight,
+  pageWidth
 } from '../constants'
 import { useEffect, useRef, useState } from 'react'
 import styles from './page.module.css'
 
-export default function Home() {
-  const isRight = useRef<boolean>(true);   // X mov direction
-  const isTop = useRef<boolean>(true);     // Y mov direction
+export default function Home() { 
+  const rotDegPerSec = 360 / davidRotationTime;
+  const startPosMod = 0.5;
+  const startPos = (
+    x: boolean,
+    mod: number,
+    pageSize: string,
+    davidSize: number
+  ): string => {
+    return `translate${x ? 'X' : 'Y'}(
+      calc(${mod} * (${pageSize}) - 0.5 * ${davidSize}px)
+    )`;
+  }
+  
+  const isMobile = useRef<boolean>(false);
+  const isRight = useRef<boolean>(true);   // Horizontal mov direction
+  const isTop = useRef<boolean>(true);     // Vertical mov direction
   const davidDimensions = useRef<{height: number, width: number}>(davidSize);
-  const timeX = useRef<number>(davidMovTime.web.x);
-  const timeY = useRef<number>(davidMovTime.web.y);
   const [animateX, setAnimateX] = useState<{transition: string, transform: string}>({
-    transition: `all ${davidMovTime.web.x}s linear`,
-    transform: 'translateX(0)'    // Init x pos
+    transition: `all ${davidMoveTime.x}s linear`,
+    transform: `${startPos(true, startPosMod, pageWidth, davidSize.width)}`
   });
   const [animateY, setAnimateY] = useState<{transition: string, transform: string}>({
-    transition: `all ${davidMovTime.web.y}s linear`,
-    transform: 'translateY(calc(50vh - 7px - 367px))'   // Init y pos
+    transition: `all ${davidMoveTime.y}s linear`,
+    transform: `${startPos(false, startPosMod, pageHeight, davidSize.height)}`
   });
-
-  const rotDegPerSec = 3;
 
   // Detect when David reaches the side of the container and make it bounce
   // the opposite direction. The David should always overflow 25% of its
@@ -41,7 +54,7 @@ export default function Home() {
 
     // Obtain David's new dimensions (due to rotation) when it reaches the
     // opposite edge after bouncing on current edge
-    const newDimensions = (horMov: boolean): {width: number, height: number} => {
+    const newDimensions = (movTime: number): {width: number, height: number} => {
       const dimensions = {width: 0, height: 0};
 
       try {
@@ -53,9 +66,7 @@ export default function Home() {
           const currRad = matrixEl[0] != 'none'
             ? Math.acos(Number(matrixEl[3]))
             : 0;
-          const travelRad = horMov
-            ? rotDegPerSec * timeX.current * (Math.PI/180)
-            : rotDegPerSec * timeY.current * (Math.PI/180);
+          const travelRad = rotDegPerSec * movTime * (Math.PI/180);
           const finalRad = currRad + travelRad;
           const newCos = Math.cos(finalRad);
           const newSin = Math.sin(finalRad);
@@ -95,10 +106,13 @@ export default function Home() {
 
     // Calc new x movement upon David reaching a horizontal edge, adjusted for
     // 25% horizontal overflow
-    const bounceX = (e : Event) => {
-      e.stopPropagation();
-  
-      const dimensions = newDimensions(true);
+    const bounceX = (e?: Event, time: number = davidMoveTime.x): void => {
+      // Stop bubbling so that bounceY does not get mistakenly called
+      if (e) {
+        e.stopPropagation();
+      }
+
+      const dimensions = newDimensions(time);
       const overflow = Math.round(dimensions.width * 0.25);
       const horDiff = Math.round(Math.abs(
         (dimensions.width - davidDimensions.current.width) / 2
@@ -106,12 +120,12 @@ export default function Home() {
 
       if (isRight.current) {
         setAnimateX({
-          ...animateX,
+          transition: `all ${time}s linear`,
           transform: `translateX(${horDiff - overflow}px)`
         });
       } else {
         setAnimateX({
-          ...animateX,
+          transition: `all ${time}s linear`,
           transform: `translateX(calc(100vw - 803px + ${overflow - horDiff}px))`
         });
       }
@@ -120,10 +134,13 @@ export default function Home() {
 
     // Calc new y movement upon David reaching vertical edge, adjusted for
     // 25% vertical overflow
-    const bounceY = (e : Event) => {
-      e.stopPropagation();
+    const bounceY = (e?: Event, time: number = davidMoveTime.y): void => {
+      if (e) {
+        // Stop bubbling so that bounceX does not get mistakenly called
+        e.stopPropagation();
+      }
 
-      const dimensions = newDimensions(false);
+      const dimensions = newDimensions(time);
       const overflow = Math.round(dimensions.height * 0.25);
       const verDiff = Math.round(Math.abs(
         (davidDimensions.current.height - dimensions.height) / 2
@@ -131,52 +148,40 @@ export default function Home() {
 
       // Note that unlike horizontal offset. vertical offset is affected by the
       // fact that David's h > w
+      const newDimenTaller = dimensions.height > davidDimensions.current.height;
       if (isTop.current) {
-        const offsetBot = dimensions.height > davidDimensions.current.height
-          ? overflow - verDiff 
-          : overflow + verDiff;
         setAnimateY({
-          ...animateY,
-          transform: `translateY(calc(100vh - 748px + ${offsetBot}px))`
+          transition: `all ${time}s linear`,
+          transform: `translateY(calc(100vh - 748px + ${newDimenTaller
+            ? overflow - verDiff
+            : overflow + verDiff}px))`
         });
       } else {
-        const offsetTop = dimensions.height > davidDimensions.current.height
-          ? verDiff - overflow
-          : 0 - overflow - verDiff;
         setAnimateY({
-          ...animateY,
-          transform: `translateY(${offsetTop}px)`
+          transition: `all ${time}s linear`,
+          transform: `translateY(${newDimenTaller
+            ? verDiff - overflow
+            : 0 - overflow - verDiff}px)`
         });
       }
       isTop.current = !isTop.current;
     }
 
-    const onResize = () => {
-      const isMobile = window.innerWidth <= mobileSize;
-
-      davidDimensions.current = isMobile ? davidSmallSize : davidSize;
-      timeX.current = isMobile ? davidMovTime.mobile.x : davidMovTime.web.x;
-      timeY.current = isMobile ? davidMovTime.mobile.y : davidMovTime.web.y;
-      setAnimateX({
-        ...animateX,
-        transition: `all ${isMobile ? davidMovTime.mobile.x : davidMovTime.web.x}s linear`
-      });
-      setAnimateY({
-        ...animateY,
-        transition: `all ${isMobile ? davidMovTime.mobile.y : davidMovTime.web.y}s linear`
-      });
+    // David animations will have different 
+    const initMov = (): void => {
+      bounceX(undefined, davidMoveTime.x * startPosMod);
+      bounceY(undefined, davidMoveTime.y * startPosMod);
     }
 
-    // Init
-    // onResize();
-    setAnimateX({
-      ...animateX,
-      transform: 'translateX(calc(100vw - 482px - 321px))'
-    });
-    setAnimateY({
-      ...animateY,
-      transform: 'translateY(0)'
-    });
+    // Mobile view will have a different initial movements due to David size
+    // difference
+    const onResize = (): void => {
+      try {
+      } catch(e: any) {
+        console.error(e);
+      }
+    }
+    initMov();
 
     // Event listeners
     x?.addEventListener("transitionend", bounceX);

@@ -1,10 +1,10 @@
-export const spacing = 7;   // Change the global css var too
-export const navWidth = 300;
+export const spacing = 7;     // Change the global css var too
+export const navWidth = 300;  // Corresponds to navbar css value
 export const mobileSize = 810;
 
 export const logoSizeLarge = 75;
 export const logoSizeSmall = 50;
-export const slideAnimationDuration = 500; // Change the global css var too
+export const slideAnimationDuration = 500;  // Change the global css var too
 export const spotifyNormal = 352;
 export const spotifyCompact = 152;
 export const tabs = [
@@ -30,17 +30,13 @@ export const tabs = [
     }
 ];
 
-export const davidRotationTime = 120;
-export const davidMovTime = {
-    web: {
-        x: 35,
-        y: 25,
-    },
-    mobile: {
-        x: 20,
-        y: 30,
-    }
-}
+export const davidRotationTime = 120;  // Corresponds to home page css value
+export const pageWidth = `(100vw - ${navWidth}px - 3 * ${spacing}px)`;
+export const pageHeight = `(100vh - 2 * ${spacing}px)`;
+export const davidMoveTime = {
+    x: 35,
+    y: 25,
+};
 export const davidSize = {
     height: 734,
     width: 482,
