@@ -1,147 +1,147 @@
 .navigation {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing);
 
-    height: 100%;
-    width: 300px;
-    min-width: 300px;
-    max-width: 300px;
+  height: 100%;
+  width: 300px;
+  min-width: 300px;
+  max-width: 300px;
 
-    font-size: 12px;
+  font-size: 12px;
 }
 
 .navigate {
-    display: flex;
-    flex-direction: column;
-    gap: var(--double-spacing);
+  display: flex;
+  flex-direction: column;
+  gap: var(--double-spacing);
 
-    height: 100%;
-    padding: var(--spacing);
+  height: 100%;
+  padding: var(--spacing);
 
-    background-color: var(--primary-color);
-    border-radius: var(--border-radius);
+  background-color: var(--primary-color);
+  border-radius: var(--border-radius);
 }
 
 .header {
-    display: flex;
+  display: flex;
 }
 
 .logo {
-    position: relative;
-    height: var(--logo-size-large);
-    width: var(--logo-size-large);
-    margin-right: auto;
-    
-    cursor: pointer;
+  position: relative;
+  height: var(--logo-size-large);
+  width: var(--logo-size-large);
+  margin-right: auto;
+
+  cursor: pointer;
 }
 
 .close_mobile_nav {
-    display: none;
+  display: none;
 }
 
 .tab_list {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing);
 
-    list-style-type: none;
+  list-style-type: none;
 }
 
 .tab {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 
-    padding: var(--double-spacing);
+  padding: var(--double-spacing);
 
-    border-radius: var(--border-radius);
-    cursor: pointer;
-    transition-duration: 500ms;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition-duration: 500ms;
 }
 
 .tab_active {
-    background-color: var(--secondary-color-2);
+  background-color: var(--secondary-color-2);
 }
 
 .title {
-    font-weight: 700;
+  font-weight: 700;
 }
 
 .music {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing);
 
-    height: auto;
-    padding: var(--spacing);
+  height: auto;
+  padding: var(--spacing);
 
-    background-color: var(--primary-color);
-    border-radius: var(--border-radius);
+  background-color: var(--primary-color);
+  border-radius: var(--border-radius);
 }
 
 /* Enable hover only on non-touch devices */
 @media (hover: hover) and (pointer: fine) {
-    :not(.tab_active).tab:hover {
-        background-color: rgba(233, 230, 227, 0.6)
-    }
+  :not(.tab_active).tab:hover {
+    background-color: rgba(233, 230, 227, 0.6);
+  }
 }
 
 /* Mobile */
 @media (max-width: 810px) {
-    .navigation_wrapper {
-        position: absolute;
-        z-index: 3;
+  .navigation_wrapper {
+    position: absolute;
+    z-index: 3;
 
-        height: 100%;
-        width: 100%;
-        overflow: hidden;
-    
-        border-radius: var(--border-radius);
-        transition-duration: var(--slide-animation-duration);
-    }
-    
-    .show_mobile_nav {
-        height: 100%;
-    }
-    
-    .hide_mobile_nav {
-        height: 0%;
-    }
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
 
-    .navigate {
-        padding: var(--double-spacing);
-    }
+    border-radius: var(--border-radius);
+    transition-duration: var(--slide-animation-duration);
+  }
 
-    .navigation {
-        gap: 0px;
-    
-        height: 100vh;
-        width: 100%;
-        min-width: 100%;
-        max-width: 100%;
-    
-        background-color: var(--primary-color);
-        border-radius: var(--border-radius);
-    }
+  .show_mobile_nav {
+    height: 100%;
+  }
 
-    .logo {
-        height: var(--logo-size-small);;
-        width: var(--logo-size-small);;
-    }
+  .hide_mobile_nav {
+    height: 0%;
+  }
 
-    .close_mobile_nav {
-        display: inherit;
+  .navigate {
+    padding: var(--double-spacing);
+  }
 
-        height: var(--nav-icon-size);
-        width: var(--nav-icon-size);
+  .navigation {
+    gap: 0px;
 
-        color: var(--secondary-color-3);
-        cursor: pointer;
-        stroke-width: 1px;
-    }
+    height: 100vh;
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
 
-    .music {
-        padding: var(--double-spacing);
-    }
+    background-color: var(--primary-color);
+    border-radius: var(--border-radius);
+  }
+
+  .logo {
+    height: var(--logo-size-small);
+    width: var(--logo-size-small);
+  }
+
+  .close_mobile_nav {
+    display: inherit;
+
+    height: var(--nav-icon-size);
+    width: var(--nav-icon-size);
+
+    color: var(--secondary-color-3);
+    cursor: pointer;
+    stroke-width: 1px;
+  }
+
+  .music {
+    padding: var(--double-spacing);
+  }
 }

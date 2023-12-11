@@ -1,10 +1,10 @@
-export const spacing = 7; // Change the global css var too
+export const spacing = 7; // Corresponds to global css var
 export const navWidth = 300; // Corresponds to navbar css value
 export const mobileSize = 810;
 
 export const logoSizeLarge = 75; // Corresponds to navbar css value
 export const logoSizeSmall = 50; // Corresponds to navbar css value
-export const slideAnimationDuration = 500; // Change the global css var too
+export const slideAnimationDuration = 500; // Corresponds to global css var
 export const spotifyNormal = 352;
 export const spotifyCompact = 152;
 export const tabs = [

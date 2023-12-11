@@ -1,31 +1,29 @@
-import AppWrapper from '../components/app_wrapper'
-import type { Metadata } from 'next'
-import { Poppins } from 'next/font/google'
-import './globals.css'
+import AppWrapper from "../components/app_wrapper";
+import type { Metadata } from "next";
+import { Poppins } from "next/font/google";
+import "./globals.css";
 
 const poppins = Poppins({
-  weight: ['400', '600', '700'],
-  style: ['normal', 'italic'],
-  subsets: ['latin']
-})
+  weight: ["400", "600", "700"],
+  style: ["normal", "italic"],
+  subsets: ["latin"],
+});
 
 export const metadata: Metadata = {
-  title: 'Yifan',
-  description: 'Portfolio',
-}
+  title: "Yifan",
+  description: "Portfolio",
+};
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en">
       <body className={poppins.className}>
-        <AppWrapper>
-          {children}
-        </AppWrapper>
+        <AppWrapper>{children}</AppWrapper>
       </body>
     </html>
-  )
+  );
 }
