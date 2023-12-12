@@ -29,10 +29,9 @@ export default function Navigation(props: Props) {
             className={
               styles["tab"] +
               " " +
-              styles["pointer"] +
-              " " +
               `${
-                props.nextPathName == tab.path
+                props.nextPathName == tab.path ||
+                (tab.path != "/" && props.nextPathName.includes(tab.path))
                   ? styles["tab_active"]
                   : styles["tab_inactive"]
               }`

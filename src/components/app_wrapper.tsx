@@ -4,9 +4,11 @@ import HeaderMobile from "./header_mobile";
 import Loading from "./loading";
 import Navigation from "./navigation";
 import { mobileSize, slideAnimationDuration } from "../constants";
-import { useEffect, useRef, useState } from "react";
+import { createContext, useEffect, useRef, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import styles from "./app_wrapper.module.css";
+
+export const NavContext = createContext((path: string) => {});
 
 export default function AppWrapper({
   children,
@@ -77,7 +79,7 @@ export default function AppWrapper({
           setIsMobileNavOpen={setIsMobileNavOpen}
         />
         {!isMobile ? loadingScreen : null}
-        {children}
+        <NavContext.Provider value={onNavClick}>{children}</NavContext.Provider>
       </div>
     </div>
   );
