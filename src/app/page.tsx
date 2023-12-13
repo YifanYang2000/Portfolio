@@ -152,8 +152,8 @@ export default function Home() {
       e?: Event,
       time: number = davidInfo.current.animateTime.x
     ): void => {
-      // Stop bubbling so that bounceY does not get mistakenly called
       if (e) {
+        // Stop bubbling so that bounceY does not get mistakenly called
         e.stopPropagation();
       }
 

@@ -8,7 +8,10 @@ import { createContext, useEffect, useRef, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import styles from "./app_wrapper.module.css";
 
-export const NavContext = createContext((path: string) => {});
+// As providing props to pages is hard without hacks, a context will be
+// introduced so that children (pages) have access to onNavClick and will be
+// able to initiate navigation
+export const NavContext = createContext((path: string): void => {});
 
 export default function AppWrapper({
   children,
@@ -20,8 +23,8 @@ export default function AppWrapper({
   const [isMobileNavOpen, setIsMobileNavOpen] = useState<boolean>(false);
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const [showLoadingScreen, setShowLoadingScreen] = useState<boolean>(false);
-  const nextpathname = useRef<string>(pathname);
-  const savedpathname = useRef<string>(pathname);
+  const [nextPathname, setNextPathname] = useState<string>("/");
+  const savedPathname = useRef<string>(pathname);
 
   const loadingScreen = <Loading showLoadingScreen={showLoadingScreen} />;
 
@@ -41,9 +44,10 @@ export default function AppWrapper({
   // During navigation, once new page is fully loaded, close loading page
   // & allow for next navigation action
   useEffect(() => {
-    if (savedpathname.current != pathname) {
+    if (savedPathname.current != pathname) {
       setShowLoadingScreen(false);
-      savedpathname.current = pathname;
+      setNextPathname(pathname);
+      savedPathname.current = pathname;
     }
   }, [pathname]);
 
@@ -54,12 +58,12 @@ export default function AppWrapper({
       return;
     }
     setShowLoadingScreen(true);
-    nextpathname.current = path;
+    setNextPathname(path);
     setTimeout(() => {
       if (isMobileNavOpen) {
         setIsMobileNavOpen(false);
       }
-      router.push(nextpathname.current);
+      router.push(path);
     }, slideAnimationDuration);
   }
 
@@ -69,7 +73,7 @@ export default function AppWrapper({
       <Navigation
         isMobile={isMobile}
         isMobileNavOpen={isMobileNavOpen}
-        nextPathName={nextpathname.current}
+        nextPathName={nextPathname}
         onNavClick={onNavClick}
         setIsMobileNavOpen={setIsMobileNavOpen}
       />
