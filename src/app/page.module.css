@@ -40,7 +40,7 @@
   .desc {
     max-width: 500px;
 
-    backdrop-filter: blur(4px);
+    backdrop-filter: blur(2px);
     border-radius: var(--border-radius);
     font-size: 16px;
     text-align: justify;

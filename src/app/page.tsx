@@ -5,6 +5,7 @@ import Image from "next/image";
 import {
   davidInitPos,
   davidMoveTime,
+  davidMoveTimeMobile,
   davidSmallSize,
   davidSize,
   davidRotationTime,
@@ -232,6 +233,7 @@ export default function Home() {
         viewChange = true;
         davidInfo.current = {
           ...davidInfo.current,
+          animateTime: davidMoveTimeMobile,
           dimensions: davidSmallSize,
           pageDimensions: pageSizeMobile,
           isRight: false,
@@ -242,6 +244,7 @@ export default function Home() {
         viewChange = true;
         davidInfo.current = {
           ...davidInfo.current,
+          animateTime: davidMoveTime,
           dimensions: davidSize,
           pageDimensions: pageSize,
           isRight: false,

@@ -43,6 +43,10 @@ export const davidMoveTime = {
   x: 35,
   y: 25,
 };
+export const davidMoveTimeMobile = {
+  x: 20,
+  y: 25,
+};
 export const davidInitPos = {
   x: 0.5,
   y: 0.5,
