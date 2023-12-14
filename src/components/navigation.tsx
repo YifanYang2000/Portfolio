@@ -21,7 +21,7 @@ interface Props {
 }
 
 export default function Navigation(props: Props) {
-  function getTabs() {
+  const getTabs = () => {
     return (
       <ul className={styles.tab_list}>
         {tabs.map((tab, index) => (
@@ -36,10 +36,10 @@ export default function Navigation(props: Props) {
                   : styles["tab_inactive"]
               }`
             }
+            key={index}
             onClick={() => {
               props.onNavClick(tab.path);
             }}
-            key={index}
           >
             <div className={styles.title}>{tab.title}</div>
             <div>{tab.desc}</div>
@@ -47,7 +47,7 @@ export default function Navigation(props: Props) {
         ))}
       </ul>
     );
-  }
+  };
 
   return (
     <div

@@ -1,16 +1,75 @@
 .main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   height: 100%;
   width: 100%;
-  overflow-y: auto;
+  overflow: hidden;
+  padding: var(--spacing);
 
   background-color: var(--primary-color);
   border-radius: var(--border-radius);
 }
 
 .content {
-  height: 1500px;
+  display: flex;
+
+  height: 100%;
   width: 100%;
-  padding: var(--spacing);
+  overflow: hidden;
+  padding: var(--double-spacing);
+
+  border-radius: var(--border-radius);
+  transition: all 250ms;
+}
+
+.content div:nth-of-type(1) {
+  margin-right: auto;
+}
+
+.list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 100%;
+  width: 30%;
+}
+
+.tab_list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--double-spacing);
+  align-items: center;
+  justify-content: center;
+
+  list-style-type: none;
+}
+
+.tab {
+  cursor: default;
+  font-size: 36px;
+  font-weight: 700;
+  text-align: center;
+  transition: all 250ms;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.out_focus {
+  color: white;
+  opacity: 0.25;
+}
+
+/* Enable hover only on non-touch devices */
+@media (hover: hover) and (pointer: fine) {
+  .tab:hover {
+    color: white;
+    opacity: 1;
+  }
 }
 
 /* Mobile */
