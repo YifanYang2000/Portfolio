@@ -23,7 +23,7 @@ export default function AppWrapper({
   const [isMobileNavOpen, setIsMobileNavOpen] = useState<boolean>(false);
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const [showLoadingScreen, setShowLoadingScreen] = useState<boolean>(false);
-  const [nextPathname, setNextPathname] = useState<string>("/");
+  const [nextPathname, setNextPathname] = useState<string>(pathname);
   const savedPathname = useRef<string>(pathname);
 
   const loadingScreen = <Loading showLoadingScreen={showLoadingScreen} />;
