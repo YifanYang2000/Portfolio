@@ -3,11 +3,15 @@
 import David from "./../resources/David.png";
 import Image from "next/image";
 import {
+  CoordNum,
+  DimenNum,
+  DimenStr,
   davidInitPos,
   davidMoveTime,
   davidMoveTimeMobile,
   davidSmallSize,
   davidSize,
+  davidOverflow,
   davidRotationTime,
   mobileSize,
   pageSize,
@@ -16,40 +20,31 @@ import {
 import { useEffect, useRef, useState } from "react";
 import styles from "./page.module.css";
 
+interface MovStyle {
+  transition: string;
+  transform: string;
+}
+
 export default function Home() {
-  const rotDegPerSec = 360 / davidRotationTime;
+  const radPerSec = (2 * Math.PI) / davidRotationTime;
   const isMobile = useRef<boolean>(false);
   const davidInfo = useRef<{
-    dimensions: {
-      height: number;
-      width: number;
-    };
-    pageDimensions: {
-      height: string;
-      width: string;
-    };
-    startPosMod: {
-      x: number;
-      y: number;
-    };
-    animateTime: {
-      x: number;
-      y: number;
-    };
-    isRight: boolean;
-    isTop: boolean;
+    dimensions: DimenNum;
+    pageDimensions: DimenStr;
+    startPosMod: CoordNum;
+    animateTime: CoordNum;
+    goingRight: boolean;
+    goingTop: boolean;
   }>({
     dimensions: davidSize,
     pageDimensions: pageSize,
     startPosMod: davidInitPos,
     animateTime: davidMoveTime,
-    isRight: false,
-    isTop: false,
+    goingRight: false,
+    goingTop: false,
   });
 
-  const startStyle = (
-    hor: boolean
-  ): { transition: string; transform: string } => {
+  const startStyle = (hor: boolean): MovStyle => {
     const mod = hor
       ? davidInfo.current.startPosMod.x
       : davidInfo.current.startPosMod.y;
@@ -66,22 +61,9 @@ export default function Home() {
         calc((${mod} * ${pageSize}) - (0.5 * ${davidSize}px)))`,
     };
   };
+  const [animateX, setAnimateX] = useState<MovStyle>(startStyle(true));
+  const [animateY, setAnimateY] = useState<MovStyle>(startStyle(false));
 
-  const [animateX, setAnimateX] = useState<{
-    transition: string;
-    transform: string;
-  }>(startStyle(true));
-  const [animateY, setAnimateY] = useState<{
-    transition: string;
-    transform: string;
-  }>(startStyle(false));
-
-  // Detect when David reaches the side of the container and make it bounce
-  // the opposite direction. The David should always overflow 25% of its
-  // height/width to the horizontal/vertical edges before bouncing back
-  //
-  // When transitioning from web to mobile view or vice-versa, reset
-  // the animation
   useEffect(() => {
     const x = document.querySelector(`.${styles.x}`);
     const y = document.querySelector(`.${styles.y}`);
@@ -89,10 +71,8 @@ export default function Home() {
 
     // Obtain David's new dimensions (due to rotation) when it reaches the
     // opposite edge after bouncing on current edge
-    const newDimensions = (
-      movTime: number
-    ): { width: number; height: number } => {
-      const dimensions = { width: 0, height: 0 };
+    const newDimensions = (movTime: number): DimenNum => {
+      let dimensions: DimenNum = { width: 0, height: 0 };
 
       try {
         if (rotate != null) {
@@ -101,42 +81,33 @@ export default function Home() {
             .getPropertyValue("transform")
             .split(", ");
           const currRad =
-            matrixEl[0] != "none" ? Math.acos(Number(matrixEl[3])) : 0;
-          const travelRad = rotDegPerSec * movTime * (Math.PI / 180);
-          const finalRad = currRad + travelRad;
-          const newCos = Math.cos(finalRad);
-          const newSin = Math.sin(finalRad);
+            matrixEl[0] != "none"
+              ? Math.atan2(Number(matrixEl[1]), Number(matrixEl[3]))
+              : 0;
+          const travelRad = radPerSec * movTime;
+          const finalRad = (currRad + travelRad) % (2 * Math.PI);
+          const finalRadPos = finalRad < 0 ? finalRad + 2 * Math.PI : finalRad;
+
+          const cos = Math.cos(finalRadPos);
+          const sin = Math.sin(finalRadPos);
+          const height = davidInfo.current.dimensions.height;
+          const width = davidInfo.current.dimensions.width;
 
           if (
-            (0 <= finalRad && finalRad <= Math.PI * 0.5) ||
-            (Math.PI <= finalRad && finalRad <= Math.PI * 1.5)
+            (0 <= finalRadPos && finalRadPos < Math.PI * 0.5) ||
+            (Math.PI <= finalRadPos && finalRadPos < Math.PI * 1.5)
           ) {
-            dimensions.height = Math.round(
-              Math.abs(
-                davidInfo.current.dimensions.width * newSin +
-                  davidInfo.current.dimensions.height * newCos
-              )
-            );
-            dimensions.width = Math.round(
-              Math.abs(
-                davidInfo.current.dimensions.width * newCos +
-                  davidInfo.current.dimensions.height * newSin
-              )
-            );
+            dimensions = {
+              height: Math.round(Math.abs(width * sin + height * cos)),
+              width: Math.round(Math.abs(width * cos + height * sin)),
+            };
           } else {
-            dimensions.height = Math.round(
-              Math.abs(
-                davidInfo.current.dimensions.width * newSin -
-                  davidInfo.current.dimensions.height * newCos
-              )
-            );
-            dimensions.width = Math.round(
-              Math.abs(
-                davidInfo.current.dimensions.width * newCos -
-                  davidInfo.current.dimensions.height * newSin
-              )
-            );
+            dimensions = {
+              height: Math.round(Math.abs(height * cos - width * sin)),
+              width: Math.round(Math.abs(width * cos - height * sin)),
+            };
           }
+
           return dimensions;
         } else {
           throw new Error("Rotate div is null");
@@ -153,33 +124,25 @@ export default function Home() {
       e?: Event,
       time: number = davidInfo.current.animateTime.x
     ): void => {
-      if (e) {
-        // Stop bubbling so that bounceY does not get mistakenly called
-        e.stopPropagation();
-      }
+      // Stop bubbling so that bounceY does not get mistakenly called
+      if (e) e.stopPropagation();
 
-      const dimensions = newDimensions(time);
-      const overflow = Math.round(dimensions.width * 0.25);
-      const horDiff = Math.round(
+      const dimensions: DimenNum = newDimensions(time);
+      const overflow: number = Math.round(dimensions.width * davidOverflow);
+      const horDiff: number = Math.round(
         Math.abs((dimensions.width - davidInfo.current.dimensions.width) / 2)
       );
 
-      if (davidInfo.current.isRight) {
-        setAnimateX({
-          transition: `all ${time}s linear`,
-          transform: `translateX(${horDiff - overflow}px)`,
-        });
-      } else {
-        setAnimateX({
-          transition: `all ${time}s linear`,
-          transform: `translateX(calc(
-            ${davidInfo.current.pageDimensions.width} -
-            ${davidInfo.current.dimensions.width}px +
-            ${overflow - horDiff}px
-          ))`,
-        });
-      }
-      davidInfo.current.isRight = !davidInfo.current.isRight;
+      setAnimateX({
+        transition: `all ${time}s linear`,
+        transform: davidInfo.current.goingRight
+          ? `translateX(${horDiff - overflow}px)`
+          : `translateX(calc(
+              ${davidInfo.current.pageDimensions.width} -
+              ${davidInfo.current.dimensions.width}px +
+              ${overflow - horDiff}px))`,
+      });
+      davidInfo.current.goingRight = !davidInfo.current.goingRight;
     };
 
     // Calc new y movement upon David reaching vertical edge, adjusted for
@@ -188,39 +151,31 @@ export default function Home() {
       e?: Event,
       time: number = davidInfo.current.animateTime.y
     ): void => {
-      if (e) {
-        // Stop bubbling so that bounceX does not get mistakenly called
-        e.stopPropagation();
-      }
+      // Stop bubbling so that bounceX does not get mistakenly called
+      if (e) e.stopPropagation();
 
-      const dimensions = newDimensions(time);
-      const overflow = Math.round(dimensions.height * 0.25);
-      const verDiff = Math.round(
+      const dimensions: DimenNum = newDimensions(time);
+      const overflow: number = Math.round(dimensions.height * davidOverflow);
+      const verDiff: number = Math.round(
         Math.abs((davidInfo.current.dimensions.height - dimensions.height) / 2)
       );
+      const newDimenTaller: boolean =
+        dimensions.height > davidInfo.current.dimensions.height;
 
       // Note that unlike horizontal offset. vertical offset is affected by the
       // fact that David's h > w
-      const newDimenTaller =
-        dimensions.height > davidInfo.current.dimensions.height;
-      if (davidInfo.current.isTop) {
-        setAnimateY({
-          transition: `all ${time}s linear`,
-          transform: `translateY(calc(
-            ${davidInfo.current.pageDimensions.height} -
-            ${davidInfo.current.dimensions.height}px +
-            ${newDimenTaller ? overflow - verDiff : overflow + verDiff}px
-          ))`,
-        });
-      } else {
-        setAnimateY({
-          transition: `all ${time}s linear`,
-          transform: `translateY(${
-            newDimenTaller ? verDiff - overflow : 0 - overflow - verDiff
-          }px)`,
-        });
-      }
-      davidInfo.current.isTop = !davidInfo.current.isTop;
+      setAnimateY({
+        transition: `all ${time}s linear`,
+        transform: davidInfo.current.goingTop
+          ? `translateY(calc(
+              ${davidInfo.current.pageDimensions.height} -
+              ${davidInfo.current.dimensions.height}px +
+              ${newDimenTaller ? overflow - verDiff : overflow + verDiff}px))`
+          : `translateY(${
+              newDimenTaller ? verDiff - overflow : 0 - overflow - verDiff
+            }px)`,
+      });
+      davidInfo.current.goingTop = !davidInfo.current.goingTop;
     };
 
     // Mobile view will have a different initial movements due to David size
@@ -236,8 +191,8 @@ export default function Home() {
           animateTime: davidMoveTimeMobile,
           dimensions: davidSmallSize,
           pageDimensions: pageSizeMobile,
-          isRight: false,
-          isTop: false,
+          goingRight: false,
+          goingTop: false,
         };
       } else if (window.innerWidth > mobileSize && isMobile.current) {
         isMobile.current = false;
@@ -247,8 +202,8 @@ export default function Home() {
           animateTime: davidMoveTime,
           dimensions: davidSize,
           pageDimensions: pageSize,
-          isRight: false,
-          isTop: false,
+          goingRight: false,
+          goingTop: false,
         };
       }
 

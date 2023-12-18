@@ -76,11 +76,15 @@
     /* For David debugging purposes, uncomment below */
     /* background-color: purple; */
     animation: rotate 120s linear infinite;
+    /* transform: rotate(315deg); */
     transform-origin: center;
   }
 }
 
 @keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
   100% {
     transform: rotate(360deg);
   }

@@ -1,3 +1,16 @@
+export interface DimenStr {
+  height: string;
+  width: string;
+}
+export interface DimenNum {
+  height: number;
+  width: number;
+}
+export interface CoordNum {
+  x: number;
+  y: number;
+}
+
 export const spacing: number = 7; // Corresponds to global css var
 export const navWidth: number = 300; // Corresponds to navbar css value
 export const mobileSize: number = 810;
@@ -32,32 +45,33 @@ export const tabs: Array<{ title: string; desc: string; path: string }> = [
 ];
 
 export const davidRotationTime: number = 120; // Corresponds to home page css value
-export const pageSize: { height: string; width: string } = {
+export const davidOverflow: number = 0.25;
+export const pageSize: DimenStr = {
   height: `(100vh - 2 * ${spacing}px)`,
   width: `(100vw - ${navWidth}px - 3 * ${spacing}px)`,
 };
-export const pageSizeMobile: { height: string; width: string } = {
+export const pageSizeMobile: DimenStr = {
   height: "100vh",
   width: "100vw",
 };
-export const davidMoveTime: { x: number; y: number } = {
+export const davidMoveTime: CoordNum = {
   x: 35,
   y: 25,
 };
-export const davidMoveTimeMobile: { x: number; y: number } = {
+export const davidMoveTimeMobile: CoordNum = {
   x: 20,
   y: 25,
 };
-export const davidInitPos: { x: number; y: number } = {
+export const davidInitPos: CoordNum = {
   x: 0.5,
   y: 0.5,
 };
-export const davidSize: { height: number; width: number } = {
+export const davidSize: DimenNum = {
   // Corresponds to home page css values
   height: 734,
   width: 482,
 };
-export const davidSmallSize: { height: number; width: number } = {
+export const davidSmallSize: DimenNum = {
   // Corresponds to home page css values
   height: 503,
   width: 330,
