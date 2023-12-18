@@ -12,7 +12,7 @@ export interface CoordNum {
 }
 
 export const spacing: number = 7; // Corresponds to global css var
-export const navWidth: number = 300; // Corresponds to navbar css value
+export const navWidth: number = 270; // Corresponds to global css value
 export const mobileSize: number = 810;
 export const primaryColor: string = "var(--primary-color)";
 
@@ -63,6 +63,7 @@ export const davidMoveTimeMobile: CoordNum = {
   y: 25,
 };
 export const davidInitPos: CoordNum = {
+  // Corresponds to home page css values
   x: 0.5,
   y: 0.5,
 };

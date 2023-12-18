@@ -4,9 +4,9 @@
   gap: var(--spacing);
 
   height: 100%;
-  width: 270px;
-  min-width: 270px;
-  max-width: 270px;
+  width: var(--nav-width);
+  min-width: var(--nav-width);
+  max-width: var(--nav-width);
 
   font-size: 12px;
 }

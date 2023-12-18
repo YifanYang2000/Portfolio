@@ -12,6 +12,7 @@ import styles from "./app_wrapper.module.css";
 // introduced so that children (pages) have access to onNavClick and will be
 // able to initiate navigation
 export const NavContext = createContext((path: string): void => {});
+export const MobileContext = createContext(false);
 
 export default function AppWrapper({
   children,
@@ -83,7 +84,11 @@ export default function AppWrapper({
           setIsMobileNavOpen={setIsMobileNavOpen}
         />
         {!isMobile ? loadingScreen : null}
-        <NavContext.Provider value={onNavClick}>{children}</NavContext.Provider>
+        <MobileContext.Provider value={isMobile}>
+          <NavContext.Provider value={onNavClick}>
+            {children}
+          </NavContext.Provider>
+        </MobileContext.Provider>
       </div>
     </div>
   );
