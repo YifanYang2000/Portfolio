@@ -1,11 +1,6 @@
 .main {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
   height: 100%;
   width: 100%;
-  overflow: hidden;
   padding: var(--spacing);
 
   background-color: var(--primary-color);
@@ -15,6 +10,8 @@
 .content {
   display: flex;
 
+  position: relative;
+
   height: 100%;
   width: 100%;
   overflow: hidden;
@@ -22,6 +19,26 @@
 
   border-radius: var(--border-radius);
   transition: all 250ms;
+
+  .content_shade {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+
+    height: 100%;
+    width: 100%;
+
+    background-color: var(--secondary-color-3);
+    border-radius: var(--border-radius);
+    opacity: 0;
+    transition: all 250ms;
+  }
+
+  .show_shade {
+    opacity: 0.25;
+    transition: all 250ms;
+  }
 }
 
 .content div:nth-of-type(1) {
@@ -32,6 +49,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+
+  z-index: 1;
 
   height: 100%;
   width: 30%;
@@ -75,9 +94,67 @@
 /* Mobile */
 @media (max-width: 810px) {
   .main {
-    height: fit-content;
-    overflow-y: visible;
+    padding: 0px;
 
     border-radius: 0px;
+  }
+
+  .content {
+    flex-direction: column;
+    gap: var(--spacing);
+
+    height: fit-content;
+    padding: 0px var(--double-spacing) var(--double-spacing)
+      var(--double-spacing);
+
+    .content_shade {
+      display: none;
+    }
+  }
+
+  .list {
+    height: fit-content;
+    width: 100%;
+  }
+
+  .tab_list {
+    gap: var(--spacing);
+
+    height: fit-content;
+    width: 100%;
+  }
+
+  .tab {
+    display: flex;
+    align-items: flex-end;
+
+    position: relative;
+    height: auto;
+    width: 100%;
+    aspect-ratio: 2/3;
+
+    background-color: red;
+    border-radius: var(--border-radius);
+    color: white;
+    padding: var(--spacing);
+    text-align: left;
+
+    .tab_shade {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      z-index: 0;
+
+      height: 100%;
+      width: 100%;
+
+      background-color: var(--secondary-color-3);
+      border-radius: var(--border-radius);
+      opacity: 0.25;
+    }
+
+    .tab_title {
+      z-index: 1;
+    }
   }
 }

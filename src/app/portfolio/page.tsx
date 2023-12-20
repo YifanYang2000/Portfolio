@@ -1,11 +1,12 @@
 "use client";
 
 import { useContext, useState } from "react";
-import { NavContext } from "../../components/app_wrapper";
+import { MobileContext, NavContext } from "../../components/app_wrapper";
 import { primaryColor, projectTabs } from "../../constants";
 import styles from "./page.module.css";
 
 export default function Portfolio() {
+  const isMobile = useContext(MobileContext);
   const onNavClick = useContext(NavContext);
   const [hover, setHover] = useState<number | null>(null);
   const [clicked, setClicked] = useState<boolean>(false);
@@ -38,7 +39,7 @@ export default function Portfolio() {
               }
             }}
             onMouseOver={() => {
-              if (!clicked) {
+              if (!clicked && !isMobile) {
                 setHover(index);
                 setContentStyle({
                   backgroundColor: tab.temp_bg,
@@ -46,7 +47,7 @@ export default function Portfolio() {
               }
             }}
             onMouseOut={() => {
-              if (!clicked) {
+              if (!clicked && !isMobile) {
                 setHover(null);
                 setContentStyle({
                   backgroundColor: primaryColor,
@@ -54,7 +55,8 @@ export default function Portfolio() {
               }
             }}
           >
-            {tab.title}
+            <div className={styles.tab_shade}></div>
+            <div className={styles.tab_title}>{tab.title}</div>
           </li>
         ))}
       </ul>
@@ -66,6 +68,13 @@ export default function Portfolio() {
       <div className={styles.content} style={contentStyle}>
         <div className={styles.list}>{getTabs(true)}</div>
         <div className={styles.list}>{getTabs(false)}</div>
+        <div
+          className={
+            styles["content_shade"] +
+            " " +
+            `${hover != null ? styles["show_shade"] : ""}`
+          }
+        ></div>
       </div>
     </main>
   );

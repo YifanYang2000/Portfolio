@@ -91,7 +91,7 @@ export const projectTabs: Array<{
     temp_bg: "blue",
   },
   {
-    title: "Unity Project (WIP)",
+    title: "Unity Game (WIP)",
     path: "",
     IP: true,
     temp_bg: "red",
