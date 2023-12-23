@@ -1,0 +1,158 @@
+.main {
+  display: flex;
+  justify-content: center;
+
+  height: 100%;
+  width: 100%;
+  overflow-y: auto;
+
+  background-color: var(--primary-color);
+  border-radius: var(--border-radius);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+
+  height: fit-content;
+  width: 100%;
+  max-width: 1500px;
+  padding: var(--double-spacing);
+}
+
+.title,
+.navigate {
+  font-size: 36px;
+  font-weight: 700;
+}
+
+.sub_title {
+  display: flex;
+  gap: 30px;
+
+  width: 100%;
+}
+.sub_title div {
+  width: 100%;
+}
+
+.banner {
+  height: auto;
+  width: 100%;
+  aspect-ratio: 2.5;
+
+  background-color: white;
+  border-radius: var(--border-radius);
+}
+
+.info {
+  display: flex;
+  gap: 30px;
+
+  height: fit-content;
+  width: 100%;
+
+  font-size: 20px;
+
+  .details {
+    width: 50%;
+
+    list-style: none;
+
+    .row {
+      display: flex;
+      align-items: center;
+
+      height: 50px;
+
+      border-bottom: 1px solid var(--secondary-color-3);
+      text-transform: capitalize;
+    }
+
+    .row div:nth-of-type(1) {
+      margin-right: auto;
+    }
+  }
+  .details li:nth-of-type(1) {
+    border-top: 1px solid var(--secondary-color-3);
+  }
+
+  .desc {
+    width: 50%;
+  }
+}
+
+.gallery {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing);
+
+  height: fit-content;
+  width: 100%;
+
+  .gallery_row {
+    display: flex;
+    gap: var(--spacing);
+
+    height: fit-content;
+    width: 100%;
+  }
+}
+
+.pic_type_1,
+.pic_type_2 {
+  height: auto;
+  width: 100%;
+
+  border-radius: var(--border-radius);
+  background-color: white;
+}
+
+.pic_type_1 {
+  aspect-ratio: 2.5;
+}
+
+.pic_type_2 {
+  aspect-ratio: 1;
+}
+
+.footer {
+  display: flex;
+
+  width: 100%;
+  padding-top: 30px;
+
+  .navigate {
+    cursor: pointer;
+    text-align: left;
+    transition: all linear 250ms;
+  }
+
+  .italic {
+    font-style: italic;
+  }
+}
+.footer div:last-child {
+  margin-left: auto;
+  text-align: right;
+}
+
+/* Enable hover only on non-touch devices */
+@media (hover: hover) and (pointer: fine) {
+  .footer {
+    .navigate:hover {
+      color: black;
+    }
+  }
+}
+
+/* Mobile */
+@media (max-width: 810px) {
+  .main {
+    height: fit-content;
+    overflow-y: visible;
+
+    border-radius: 0px;
+  }
+}

@@ -131,7 +131,7 @@
     position: relative;
     height: auto;
     width: 100%;
-    aspect-ratio: 2/3;
+    aspect-ratio: 1;
 
     background-color: red;
     border-radius: var(--border-radius);

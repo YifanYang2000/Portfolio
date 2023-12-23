@@ -92,8 +92,8 @@ export const projectTabs: Array<{
   },
   {
     title: "Unity Game (WIP)",
-    path: "",
-    IP: true,
+    path: "/portfolio/unity",
+    IP: false,
     temp_bg: "red",
   },
   {

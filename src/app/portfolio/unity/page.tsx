@@ -1,14 +1,13 @@
 import ProjectTemplate from "../../../components/project_template";
-import styles from "./page.module.css";
 
-export default function Website() {
+export default function Unity() {
   return (
     <ProjectTemplate
-      title="Website v4.0"
-      subTitle="We don't talk about version 1.0 through 3.0."
+      title="Unity Game (WIP)"
+      subTitle="Solo game dev, how hard can it be?"
       projectDetail={{
-        year: 2023,
-        stack: "Figma, NextJS, TypeScript",
+        year: 2025,
+        stack: "Unity",
         github: "test",
       }}
       projectDescription="Lorem ipsum dolor sit amet, consectetur adipiscing
