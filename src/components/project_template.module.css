@@ -40,7 +40,7 @@
 
 .title,
 .navigate {
-  font-size: 36px;
+  font-size: 2rem;
   font-weight: 700;
 }
 
@@ -54,15 +54,6 @@
   width: 100%;
 }
 
-.banner {
-  height: auto;
-  width: 100%;
-  aspect-ratio: 2.5;
-
-  background-color: white;
-  border-radius: var(--border-radius);
-}
-
 .info {
   display: flex;
   gap: var(--project-spacing);
@@ -70,12 +61,13 @@
   height: fit-content;
   width: 100%;
 
-  font-size: 20px;
+  font-size: 1rem;
 
   .details {
     width: 100%;
 
     list-style: none;
+    text-align: right;
 
     .row {
       display: flex;
@@ -135,6 +127,7 @@
 }
 .footer div:last-child {
   margin-left: auto;
+  padding-top: 0;
   text-align: right;
 }
 
@@ -158,6 +151,11 @@
 
   .pic_type_1 {
     aspect-ratio: 1;
+  }
+
+  .title,
+  .navigate {
+    font-size: 1.5rem;
   }
 
   .sub_title {

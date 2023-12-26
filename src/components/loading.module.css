@@ -28,7 +28,7 @@
   background-color: var(--secondary-color-3);
   color: white;
   font-weight: 700;
-  font-size: 48px;
+  font-size: 3rem;
 }
 
 .loading span {
@@ -54,6 +54,8 @@
 
   .loading {
     height: 100vh;
+
+    font-size: 2rem;
   }
 }
 
