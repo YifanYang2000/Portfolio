@@ -3,7 +3,7 @@
   --max-width: 1500px;
   --spacing: 7px;
   --double-spacing: 14px;
-  --nav-width: 270px;
+  --nav-width: 270px; /* Change the constant var too */
 
   --logo-size-large: 75px;
   --logo-size-small: 50px;
@@ -32,7 +32,7 @@ body {
   background-color: var(--secondary-color-1);
   color: var(--secondary-color-3);
   letter-spacing: -0.5px;
-  line-height: 1;
+  line-height: 1.25;
 }
 
 body {

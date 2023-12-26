@@ -46,6 +46,9 @@ export default function AppWrapper({
   // & allow for next navigation action
   useEffect(() => {
     if (savedPathname.current != pathname) {
+      const page = document.querySelector(`.${styles.page}`);
+      page?.scroll({ top: 0 });
+
       setShowLoadingScreen(false);
       setNextPathname(pathname);
       savedPathname.current = pathname;

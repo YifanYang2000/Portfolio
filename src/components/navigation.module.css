@@ -8,7 +8,7 @@
   min-width: var(--nav-width);
   max-width: var(--nav-width);
 
-  font-size: 12px;
+  font-size: 0.8125rem;
 }
 
 .navigate {
@@ -51,7 +51,7 @@
 .tab {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 3px;
 
   padding: var(--double-spacing);
 
@@ -73,7 +73,7 @@
   flex-direction: column;
   gap: var(--spacing);
 
-  height: auto;
+  height: fit-content;
   padding: var(--spacing);
 
   background-color: var(--primary-color);

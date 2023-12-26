@@ -82,9 +82,7 @@ export default function ProjectTemplate(props: Props) {
       <div className={styles.content}>
         <div className={styles.title}>{props.title}</div>
 
-        <div className={styles.banner}>
-          <div className={styles.pic_type_1}></div>
-        </div>
+        <div className={styles.pic_type_1}></div>
 
         <div className={styles.sub_title}>
           <div className={styles.title}>{props.subTitle}</div>

@@ -96,7 +96,7 @@ export default function Navigation(props: Props) {
         <div className={styles.music}>
           <div className={styles.title}>CURRENT MOOD</div>
           <iframe
-            src="https://open.spotify.com/embed/track/1CHswVnHopmeIly3bTSnmF?utm_source=generator&theme=0"
+            src="https://open.spotify.com/embed/track/104EutLydSehDHiEjmtdBo?utm_source=generator&theme=0"
             width="100%"
             height={`${props.isMobile ? spotifyCompact : spotifyNormal}`}
             allow="clipboard-write; encrypted-media; fullscreen;

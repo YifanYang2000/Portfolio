@@ -16,7 +16,6 @@
 .intro {
   display: flex;
   flex-direction: column;
-  gap: var(--double-spacing);
 
   position: absolute;
   z-index: 2;
@@ -25,11 +24,11 @@
   overflow-wrap: break-word;
 
   .title_1 {
-    font-size: clamp(32px, 5vw, 48px);
+    font-size: clamp(2rem, 3vw, 3rem);
   }
 
   .title_2 {
-    font-size: clamp(48px, 10vw, 128px);
+    font-size: clamp(5rem, 10vw, 8rem);
     font-weight: 700;
   }
 
@@ -42,8 +41,7 @@
 
     backdrop-filter: blur(2px);
     border-radius: var(--border-radius);
-    font-size: 16px;
-    text-align: justify;
+    font-size: 1rem;
   }
 }
 
