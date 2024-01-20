@@ -7,9 +7,9 @@ export default function Website() {
       title="Website v4.0"
       subTitle="We don't talk about version 1.0 through 3.0."
       projectDetail={{
-        year: 2023,
+        year: 2024,
         stack: "Figma, NextJS, TypeScript",
-        github: "test",
+        github: "https://github.com/YifanYang2000/Portfolio",
       }}
       projectDescription="Lorem ipsum dolor sit amet, consectetur adipiscing
         elit. Nullam vulputate consequat leo, vitae vehicula est commodo vel.

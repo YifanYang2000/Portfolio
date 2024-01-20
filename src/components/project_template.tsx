@@ -3,6 +3,7 @@
 import { NavContext } from "./app_wrapper";
 import { useContext } from "react";
 import { projectTabs } from "../constants";
+import { FiExternalLink } from "react-icons/fi";
 import styles from "./project_template.module.css";
 
 interface Props {
@@ -11,7 +12,7 @@ interface Props {
   projectDetail: {
     year: number;
     stack: string;
-    github: string;
+    github: string | null;
   };
   projectDescription: string;
   images?: {};
@@ -32,7 +33,13 @@ export default function ProjectTemplate(props: Props) {
       </li>
       <li className={styles.row}>
         <div>Github</div>
-        <div></div>
+        {props.projectDetail.github ? (
+          <a href={props.projectDetail.github} target="_blank">
+            <FiExternalLink />
+          </a>
+        ) : (
+          <div>WIP</div>
+        )}
       </li>
     </ul>
   );

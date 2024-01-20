@@ -8,7 +8,7 @@ export default function Unity() {
       projectDetail={{
         year: 2025,
         stack: "Unity",
-        github: "test",
+        github: null,
       }}
       projectDescription="Lorem ipsum dolor sit amet, consectetur adipiscing
         elit. Nullam vulputate consequat leo, vitae vehicula est commodo vel.
