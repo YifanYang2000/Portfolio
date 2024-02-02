@@ -15,10 +15,11 @@ export const spacing: number = 7; // Corresponds to global css var
 export const navWidth: number = 270; // Corresponds to global css value
 export const mobileSize: number = 810;
 export const primaryColor: string = "var(--primary-color)";
+export const slideAnimationDuration: number = 500; // Corresponds to global css var
+export const modalAnimationDuration: number = 250; // Corresponds to modal css var
 
 export const logoSizeLarge: number = 75; // Corresponds to navbar css value
 export const logoSizeSmall: number = 50; // Corresponds to navbar css value
-export const slideAnimationDuration: number = 500; // Corresponds to global css var
 export const spotifyNormal: number = 352;
 export const spotifyCompact: number = 152;
 export const tabs: Array<{ title: string; desc: string; path: string }> = [

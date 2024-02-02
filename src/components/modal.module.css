@@ -1,0 +1,47 @@
+.modal {
+  --transition-time: 250ms;
+
+  position: absolute;
+  z-index: 99;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 100%;
+  width: 100%;
+
+  border-radius: var(--border-radius);
+}
+
+.bg {
+  position: absolute;
+
+  height: 100%;
+  width: 100%;
+
+  background-color: var(--secondary-color-3);
+  border-radius: var(--border-radius);
+  transition: var(--transition-time);
+}
+
+.picture {
+  position: absolute;
+  
+  height: auto;
+  width: calc(100% / 3);
+  aspect-ratio: 0.75;
+  
+  background-color: white;
+  border-radius: var(--border-radius);
+  user-select: none;
+  transition: var(--transition-time);
+}
+
+/* Use object-fit: contain; for the img*/
+
+@media (max-width: 810px) {
+  .modal {
+    display: none;
+  }
+}
