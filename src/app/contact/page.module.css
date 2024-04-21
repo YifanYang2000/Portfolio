@@ -1,4 +1,8 @@
 .main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   height: 100%;
   width: 100%;
   overflow-y: auto;
@@ -9,19 +13,69 @@
 
 .content {
   display: flex;
+  gap: var(--content-spacing);
   flex-direction: column;
+  justify-content: center;
+  
+  height: fit-content;
+  width: 80%;
+  max-width: var(--max-width);
 
-  height: 1500px;
+  font-size: clamp(1rem, 2.5vw, 2rem);
+  font-weight: 700;
+  padding: var(--double-spacing);
+}
+
+.section {
+  display: flex;
+
   width: 100%;
-  padding: var(--spacing);
+
+  .title {
+    width: 40%;
+    max-width: 300px;
+
+    font-style: italic;
+  }
+
+  .links {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.tab {
+  width: fit-content;
+
+  cursor: pointer;
+  transition: opacity 250ms;
+}
+
+.meme {
+  font-size: 0.75rem;
+  font-weight: 400;
+}
+
+.out_focus {
+  opacity: 0.25;
 }
 
 /* Mobile */
 @media (max-width: 810px) {
-  .main {
-    height: fit-content;
-    overflow-y: visible;
+ .content {
+    width: 100%;
 
-    border-radius: 0px;
+    padding: var(--double-spacing);
+  }
+
+  .section {
+    /* flex-direction: column;
+    gap: var(--double-spacing); */
+
+    .title {
+      width: 100%;
+
+      width: 25%;
+    }
   }
 }

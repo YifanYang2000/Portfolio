@@ -99,8 +99,7 @@ export default function Navigation(props: Props) {
             src="https://open.spotify.com/embed/track/104EutLydSehDHiEjmtdBo?utm_source=generator&theme=0"
             width="100%"
             height={`${props.isMobile ? spotifyCompact : spotifyNormal}`}
-            allow="clipboard-write; encrypted-media; fullscreen;
-              picture-in-picture"
+            allow="clipboard-write; encrypted-media; fullscreen; picture-in-picture"
             loading="lazy"
             style={{ border: "0" }}
           ></iframe>

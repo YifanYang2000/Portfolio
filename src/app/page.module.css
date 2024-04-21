@@ -116,7 +116,7 @@
   }
 
   .intro {
-    margin: 0px 50px;
+    margin: 0px var(--double-spacing);
   }
 
   .david {

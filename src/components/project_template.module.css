@@ -1,6 +1,4 @@
 .main {
-  --project-spacing: 30px;
-
   display: flex;
   justify-content: center;
 
@@ -15,7 +13,7 @@
 .content {
   display: flex;
   flex-direction: column;
-  gap: var(--project-spacing);
+  gap: var(--content-spacing);
 
   height: fit-content;
   width: 100%;
@@ -46,7 +44,7 @@
 
 .sub_title {
   display: flex;
-  gap: var(--project-spacing);
+  gap: var(--content-spacing);
 
   width: 100%;
 }
@@ -56,7 +54,7 @@
 
 .info {
   display: flex;
-  gap: var(--project-spacing);
+  gap: var(--content-spacing);
 
   height: fit-content;
   width: 100%;
@@ -113,7 +111,7 @@
   display: flex;
 
   width: 100%;
-  padding-top: var(--project-spacing);
+  padding-top: var(--content-spacing);
 
   .navigate {
     cursor: pointer;

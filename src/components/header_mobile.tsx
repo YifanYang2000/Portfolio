@@ -20,7 +20,11 @@ export default function HeaderMobile(props: Props) {
       className={
         styles["header"] +
         " " +
-        `${pathname == "/" ? styles["transparent"] : styles["visible"]}`
+        `${
+          pathname == "/" || pathname == "/contact"
+            ? styles["transparent"]
+            : styles["visible"]
+        }`
       }
     >
       <div

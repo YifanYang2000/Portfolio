@@ -104,3 +104,22 @@ export const projectTabs: Array<{
     temp_bg: "black",
   },
 ];
+
+export const socials: Array<{
+  type: string,
+  link: string
+}> = [
+  {
+    type: "Instagram",
+    link: "https://www.instagram.com/yifan.sheep/"
+  },
+  {
+    type: "LinkedIn",
+    link: "https://www.linkedin.com/in/yifanyang2000"
+  },
+  {
+    type: "Github",
+    link: "https://github.com/YifanYang2000"
+  }
+]
+export const email: string = "yifan.yang@hotmail.ca"
