@@ -16,7 +16,6 @@
 
   height: fit-content;
   width: 100%;
-  max-width: var(--max-width);
 }
 
 .gallery {
@@ -27,6 +26,7 @@
   z-index: 1;
 
   width: 100%;
+  max-width: var(--max-width);
   padding: var(--spacing);
 
   .artRow {
@@ -58,6 +58,8 @@
   }
 
   .gallery {
+    padding: var(--double-spacing);
+
     .artRow {
       flex-direction: column;
     }
